@@ -13,7 +13,7 @@ const App = () => {
       .catch((error) => console.log(error));
   };
   return (
-    <div className="bg-gray-800 h-screen grid place-items-center">
+    <div className=" h-screen grid place-items-center bg-cover" style={{ backgroundImage: `url("https://images.unsplash.com/photo-1434725039720-aaad6dd32dfe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bGFuZHNjYXBlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60")` }}>
       <div className="bg-white w-92 p-4 rounded-md">
         <div className="flex items-center justify-between">
           <input
@@ -33,23 +33,30 @@ const App = () => {
           </button>
         </div>
         <div>
-          <p>Temp</p>
-          {fetchWeather.main ? <h1>{fetchWeather.main.temp}°F</h1> : null}
-        </div>
-        <p>Weather</p>
-        <div>
-          {fetchWeather.weather ? <p>{fetchWeather.weather[0].main}</p> : null}
-        </div>
-        <p>Feels Like</p>
-        <div>
-          {fetchWeather.weather ? (
-            <p>{fetchWeather.main.feels_like}°F</p>
+          {fetchWeather.main ? (
+            <h1>{fetchWeather.main.temp.toFixed()}°F</h1>
           ) : null}
         </div>
-        <p>Wind</p>
-        <div>
-          {fetchWeather.wind ? <p>{fetchWeather.wind.speed}MPH</p> : null}
-        </div>
+        {fetchWeather.weather !== undefined && (
+          <div>
+            {fetchWeather.weather ? (
+              <p>{fetchWeather.weather[0].main}</p>
+            ) : null}
+
+            <p>Feels Like</p>
+            <div>
+              {fetchWeather.weather ? (
+                <p>{fetchWeather.main.feels_like.toFixed()}°F</p>
+              ) : null}
+            </div>
+            <p>Wind</p>
+            <div>
+              {fetchWeather.wind ? (
+                <p>{fetchWeather.wind.speed.toFixed()}MPH</p>
+              ) : null}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
