@@ -12,6 +12,12 @@ const App = () => {
       .then((payload) => setFetchWeather(payload))
       .catch((error) => console.log(error));
   };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      requestFetchWeather();
+    }
+ };
   return (
     <div
       className=" h-screen grid place-items-center bg-cover"
@@ -28,6 +34,7 @@ const App = () => {
             className="text-xl border-b
         p-1 border-gray-200 font-semibold uppercase flex-1"
             onChange={(e) => setLocation(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
           <button onClick={requestFetchWeather}>
             <img
